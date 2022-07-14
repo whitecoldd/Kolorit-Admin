@@ -1,28 +1,28 @@
-import "./productlist.css";
+import "../productList/productlist.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getProducts } from "../../redux/apiCalls";
+import { deleteCategory, getCategory } from "../../redux/apiCalls";
 
-export default function ProductList({productRows}) {
+export default function CategoryList() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.products);
+  const categories = useSelector((state) => state.category.categories);
 
   useEffect(() => {
-    getProducts(dispatch);
+    getCategory(dispatch);
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    deleteProduct(id, dispatch);
+    deleteCategory(id, dispatch);
   };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
     {
-      field: "product",
-      headerName: "Product",
+      field: "category",
+      headerName: "Category",
       width: 200,
       renderCell: (params) => {
         return (
@@ -33,17 +33,6 @@ export default function ProductList({productRows}) {
         );
       },
     },
-    { field: "inStock", headerName: "inStock", width: 200 },
-    {
-      field: "code",
-      headerName: "Code",
-      width: 120,
-    },
-    {
-      field: "salePrice",
-      headerName: "Price",
-      width: 160,
-    },
     {
       field: "action",
       headerName: "Action",
@@ -51,7 +40,7 @@ export default function ProductList({productRows}) {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row._id}>
+            <Link to={"/category/" + params.row._id}>
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
@@ -74,7 +63,7 @@ export default function ProductList({productRows}) {
       </Link>
       </div>
       <DataGrid
-        rows={products}
+        rows={categories}
         disableSelectionOnClick
         columns={columns}
         getRowId={(row) => row._id}

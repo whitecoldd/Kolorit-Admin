@@ -14,12 +14,25 @@ import {
   addProductStart,
   addProductSuccess,
 } from "./productRedux";
-
+import {
+  getCategoryStart,
+  getCategorySuccess,
+  getCategoryFailure,
+  deleteCategoryStart,
+  deleteCategorySuccess,
+  deleteCategoryFailure,
+  updateCategoryStart,
+  updateCategorySuccess,
+  updateCategoryFailure,
+  addCategoryStart,
+  addCategorySuccess,
+  addCategoryFailure,
+} from './catRedux'
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
-    dispatch(loginSuccess(res.data));
+    res.data.isAdmin && dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
   }
@@ -34,6 +47,15 @@ export const getProducts = async (dispatch) => {
     dispatch(getProductFailure());
   }
 };
+export const getCategory = async (dispatch) => {
+  dispatch(getCategoryStart());
+  try {
+    const res = await publicRequest.get("/cat/find/");
+    dispatch(getCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(getCategoryFailure());
+  }
+};
 
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
@@ -42,6 +64,15 @@ export const deleteProduct = async (id, dispatch) => {
     dispatch(deleteProductSuccess(id));
   } catch (err) {
     dispatch(deleteProductFailure());
+  }
+};
+export const deleteCategory = async (id, dispatch) => {
+  dispatch(deleteCategoryStart());
+  try {
+    const res = await userRequest.delete(`/cat/${id}`);
+    dispatch(deleteCategorySuccess(id));
+  } catch (err) {
+    dispatch(deleteCategoryFailure());
   }
 };
 
@@ -54,6 +85,15 @@ export const updateProduct = async (id, product, dispatch) => {
     dispatch(updateProductFailure(err));
   }
 };
+export const updateCategory = async (id, category, dispatch) => {
+  dispatch(updateCategoryStart());
+  try {
+    const res = await userRequest.put(`/cat/${id}`, category);
+    dispatch(updateCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(updateCategoryFailure(err));
+  }
+};
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
@@ -61,5 +101,14 @@ export const addProduct = async (product, dispatch) => {
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure());
+  }
+};
+export const addCategory = async (category, dispatch) => {
+  dispatch(addCategoryStart());
+  try {
+    const res = await userRequest.post(`/cat/`, category);
+    dispatch(addCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(addCategoryFailure());
   }
 };

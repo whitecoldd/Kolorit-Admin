@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import "./product.css";
+import "../product/product.css";
 import Chart from "../../comps/chart/Chart"
 import { Publish } from "@material-ui/icons";
 import { productData } from "../../dummyData";
@@ -18,7 +18,6 @@ export default function Product({productData}) {
   const dispatch = useDispatch();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
-  const [pStats, setPStats] = useState([]);
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
@@ -81,12 +80,9 @@ export default function Product({productData}) {
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Product</h1>
+        <h1 className="productTitle">Category</h1>
       </div>
       <div className="productTop">
-        <div className="productTopLeft">
-          <Chart data={pStats} dataKey="Sales" title="Sales Performance" />
-        </div>
         <div className="productTopRight">
           <div className="productInfoTop">
             <img src={product.img} alt="" className="productInfoImg" />
@@ -113,23 +109,6 @@ export default function Product({productData}) {
           <div className="productFormLeft">
             <label>Product Name</label>
             <input type="text" name="name" value={inputs.name} onChange={handleChange}/>
-            <label>Product Description</label>
-            <input type="text" name="description" value={inputs.description} onChange={handleChange}/>
-            <label>Price</label>
-            <input type="number" name="price" value={inputs.price} onChange={handleChange}/>
-            <label>Actual Price</label>
-            <input type="number" name="salePrice" value={inputs.salePrice} onChange={handleChange}/>
-            <label>Code</label>
-            <input type="text" name="code" value={inputs.code} onChange={handleChange}/>
-            <label>Promo</label>
-            <input type="text" name="promo" value={inputs.promo} onChange={handleChange}/>
-            <label>PromoType</label>
-            <input type="text" name="promoType" value={inputs.promoType} onChange={handleChange}/>
-            <label>Currency</label>
-            <input type="text" name="currency" value={inputs.currency} onChange={handleChange}/>
-            <label>Categories</label>
-            <input type="text" name="category" value={inputs.category} onChange={handleCat}/>
-            <label>In Stock</label>
             <select name="inStock" id="idStock" onChange={handleChange}>
               <option value="true">Yes</option>
               <option value="false">No</option>
