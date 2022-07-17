@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const catSlice = createSlice({
+export const categorySlice = createSlice({
   name: "category",
   initialState: {
     categories: [],
@@ -81,6 +81,6 @@ export const {
   addCategoryStart,
   addCategorySuccess,
   addCategoryFailure,
-} = catSlice.actions;
+} = categorySlice.actions;
 
-export default catSlice.reducer;
+export default categorySlice.reducer;

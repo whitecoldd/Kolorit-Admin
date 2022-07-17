@@ -57,8 +57,8 @@ export default function CategoryList() {
     
     <div className="productList">
       <div className="productTitleContainer">
-        <h1 className="productTitle">ProductList</h1>
-        <Link to="/newproduct">
+        <h1 className="productTitle">Category List</h1>
+        <Link to="/newcategory">
           <button className="productAddButton">Create</button>
       </Link>
       </div>

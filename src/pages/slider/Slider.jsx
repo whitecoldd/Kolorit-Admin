@@ -6,7 +6,7 @@ import { productData } from "../../dummyData";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
-import { updateCategory } from "../../redux/apiCalls";
+import { updateSlider } from "../../redux/apiCalls";
 import app from '../../firebase'
 import {
   getStorage,
@@ -14,26 +14,22 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-export default function Product({productData}) {
+export default function Slider({productData}) {
   const dispatch = useDispatch();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
 
   const product = useSelector((state) =>
-    state.category.categories.find((product) => product._id === productId)
+    state.slider.sliders.find((product) => product._id === productId)
     );  
 
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
-  const [cat, setCat] = useState([]);
 
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-  };
-  const handleCat = (e) => {
-    setCat(e.target.value.split(","));
   };
   const handleClick = (e) => {
     e.preventDefault();
@@ -69,9 +65,9 @@ export default function Product({productData}) {
       () => {
 
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log({ ...inputs, img: downloadURL});
+          console.log({ ...inputs, img: downloadURL });
           const product = { ...inputs, img: downloadURL };
-          updateCategory(productId, product, dispatch);
+          updateSlider(productId, product, dispatch);
         });
       }
     );
@@ -80,13 +76,16 @@ export default function Product({productData}) {
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Category</h1>
+        <h1 className="productTitle">Product</h1>
       </div>
       <div className="productTop">
+        <div className="productTopLeft">
+          <Chart dataKey="Sales" title="Sales Performance" />
+        </div>
         <div className="productTopRight">
           <div className="productInfoTop">
             <img src={product.img} alt="" className="productInfoImg" />
-            <span className="productName">{product.name}</span>
+            <span className="productName">{product.header}</span>
           </div>
           <div className="productInfoBottom">
             <div className="productInfoItem">
@@ -100,7 +99,9 @@ export default function Product({productData}) {
         <form className="productForm">
           <div className="productFormLeft">
             <label>Product Name</label>
-            <input type="text" name="name" value={inputs.name} onChange={handleChange}/>
+            <input type="text" name="header" value={inputs.header} onChange={handleChange}/>
+            <label>Product Description</label>
+            <input type="text" name="text" value={inputs.text} onChange={handleChange}/>
           </div>
           <div className="productFormRight">
             <div className="productUpload">

@@ -27,7 +27,21 @@ import {
   addCategoryStart,
   addCategorySuccess,
   addCategoryFailure,
-} from './catRedux'
+} from './categoryRedux'
+import {
+  getSliderStart,
+  getSliderSuccess,
+  getSliderFailure,
+  deleteSliderStart,
+  deleteSliderSuccess,
+  deleteSliderFailure,
+  updateSliderStart,
+  updateSliderSuccess,
+  updateSliderFailure,
+  addSliderStart,
+  addSliderSuccess,
+  addSliderFailure,
+} from './sliderRedux'
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
@@ -56,6 +70,15 @@ export const getCategory = async (dispatch) => {
     dispatch(getCategoryFailure());
   }
 };
+export const getSlider = async (dispatch) => {
+  dispatch(getSliderStart());
+  try {
+    const res = await publicRequest.get("/slider/find/");
+    dispatch(getSliderSuccess(res.data));
+  } catch (err) {
+    dispatch(getSliderFailure());
+  }
+};
 
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
@@ -73,6 +96,15 @@ export const deleteCategory = async (id, dispatch) => {
     dispatch(deleteCategorySuccess(id));
   } catch (err) {
     dispatch(deleteCategoryFailure());
+  }
+};
+export const deleteSlider = async (id, dispatch) => {
+  dispatch(deleteSliderStart());
+  try {
+    const res = await userRequest.delete(`/slider/${id}`);
+    dispatch(deleteSliderSuccess(id));
+  } catch (err) {
+    dispatch(deleteSliderFailure());
   }
 };
 
@@ -94,6 +126,15 @@ export const updateCategory = async (id, category, dispatch) => {
     dispatch(updateCategoryFailure(err));
   }
 };
+export const updateSlider = async (id, slider, dispatch) => {
+  dispatch(updateSliderStart());
+  try {
+    const res = await userRequest.put(`/slider/${id}`, slider);
+    dispatch(updateSliderSuccess(res.data));
+  } catch (err) {
+    dispatch(updateSliderFailure(err));
+  }
+};
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
@@ -110,5 +151,14 @@ export const addCategory = async (category, dispatch) => {
     dispatch(addCategorySuccess(res.data));
   } catch (err) {
     dispatch(addCategoryFailure());
+  }
+};
+export const addSlider = async (slider, dispatch) => {
+  dispatch(addSliderStart());
+  try {
+    const res = await userRequest.post(`/slider/`, slider);
+    dispatch(addSliderSuccess(res.data));
+  } catch (err) {
+    dispatch(addSliderFailure());
   }
 };

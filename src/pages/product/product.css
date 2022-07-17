@@ -127,4 +127,16 @@
     color:white;
     font-weight: 600;
     cursor: pointer;
+  } 
+  .cols{
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between;
+    padding: 0px !important;
+    margin: 0px !important;
+  }
+
+  .flex1{
+    flex: 1 !important;
+    margin-right: 5px !important;
   }

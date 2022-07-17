@@ -1,5 +1,5 @@
 import "../newProduct/newproduct.css";
-import { addCategory } from "../../redux/apiCalls";
+import { addSlider } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import app from '../../firebase'
@@ -9,7 +9,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-export default function NewCategory() {
+export default function NewSlider() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
@@ -54,14 +54,14 @@ export default function NewCategory() {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log({ ...inputs, img: downloadURL});
           const product = { ...inputs, img: downloadURL};
-          addCategory(product, dispatch);
+          addSlider(product, dispatch);
         });
       }
     );
   };
   return (
     <div className="newProduct">
-      <h1 className="addProductTitle">New Category</h1>
+      <h1 className="addProductTitle">New Slide</h1>
       <form className="addProductForm">
         <div className="addProductItem">
           <label>Image</label>
@@ -74,9 +74,18 @@ export default function NewCategory() {
         <div className="addProductItem">
           <label>Title</label>
           <input
-            name="name"
+            name="header"
             type="text"
-            placeholder="drills"
+            placeholder="smth"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="addProductItem">
+          <label>Title</label>
+          <input
+            name="text"
+            type="text"
+            placeholder="smth"
             onChange={handleChange}
           />
         </div>

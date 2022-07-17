@@ -14,7 +14,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-export default function Product({productData}) {
+export default function Product({ productData }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
@@ -22,12 +22,12 @@ export default function Product({productData}) {
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
-    );  
+  );
 
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
-
+  const [comp, setComp] = useState([])
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -35,6 +35,9 @@ export default function Product({productData}) {
   };
   const handleCat = (e) => {
     setCat(e.target.value.split(","));
+  };
+  const handleComplect = (event) => {
+    setComp(event.target.value.split(","));
   };
   const handleClick = (e) => {
     e.preventDefault();
@@ -70,14 +73,14 @@ export default function Product({productData}) {
       () => {
 
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log({ ...inputs, img: downloadURL, category: cat });
-          const product = { ...inputs, img: downloadURL, category: cat };
+          console.log({ ...inputs, img: downloadURL, category: cat, complect: comp });
+          const product = { ...inputs, img: downloadURL, category: cat, complect: comp };
           updateProduct(productId, product, dispatch);
         });
       }
     );
   };
-  
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -103,45 +106,82 @@ export default function Product({productData}) {
             </div>
             <div className="productInfoItem">
               <span className="productInfoKey">categories: </span>
-              <span className="productInfoValue">{product.category[0]} {product.category[1]}</span>
+              <span className="productInfoValue">{product.category}</span>
             </div>
           </div>
         </div>
       </div>
       <div className="productBottom">
         <form className="productForm">
-          <div className="productFormLeft">
-            <label>Product Name</label>
-            <input type="text" name="name" value={inputs.name} onChange={handleChange}/>
-            <label>Product Description</label>
-            <input type="text" name="description" value={inputs.description} onChange={handleChange}/>
-            <label>Price</label>
-            <input type="number" name="price" value={inputs.price} onChange={handleChange}/>
-            <label>Actual Price</label>
-            <input type="number" name="salePrice" value={inputs.salePrice} onChange={handleChange}/>
-            <label>Code</label>
-            <input type="text" name="code" value={inputs.code} onChange={handleChange}/>
-            <label>Promo</label>
-            <input type="text" name="promo" value={inputs.promo} onChange={handleChange}/>
-            <label>PromoType</label>
-            <input type="text" name="promoType" value={inputs.promoType} onChange={handleChange}/>
-            <label>Currency</label>
-            <input type="text" name="currency" value={inputs.currency} onChange={handleChange}/>
-            <label>Categories</label>
-            <input type="text" name="category" value={inputs.category} onChange={handleCat}/>
-            <label>In Stock</label>
-            <select name="inStock" id="idStock" onChange={handleChange}>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
+            <div className="productFormLeft flex1">
+              <label>Product Name</label>
+              <input type="text" name="name" value={inputs.name} onChange={handleChange} />
+              <label>Product Description</label>
+              <input type="text" name="description" value={inputs.description} onChange={handleChange} />
+              <label>Price</label>
+              <input type="number" name="price" value={inputs.price} onChange={handleChange} />
+              <label>Actual Price</label>
+              <input type="number" name="salePrice" value={inputs.salePrice} onChange={handleChange} />
+              <label>Code</label>
+              <input type="text" name="code" value={inputs.code} onChange={handleChange} />
+              <label>Promo</label>
+              <input type="text" name="promo" value={inputs.promo} onChange={handleChange} />
+              <label>PromoType</label>
+              <input type="text" name="promoType" value={inputs.promoType} onChange={handleChange} />
+              <label>Currency</label>
+              <input type="text" name="currency" value={inputs.currency} onChange={handleChange} />
+            </div>
+            <div className="productFormLeft flex1">
+              <label>char1</label>
+              <input type="text" name="char1" value={inputs.char1} onChange={handleChange} />
+              <label>char1a</label>
+              <input type="text" name="char1a" value={inputs.char1a} onChange={handleChange} />
+              <label>char2</label>
+              <input type="text" name="char2" value={inputs.char2} onChange={handleChange} />
+              <label>char2a</label>
+              <input type="text" name="char2a" value={inputs.char2a} onChange={handleChange} />
+              <label>char3</label>
+              <input type="text" name="char3" value={inputs.char3} onChange={handleChange} />
+              <label>char3a</label>
+              <input type="text" name="char3a" value={inputs.char3a} onChange={handleChange} />
+              <label>char4</label>
+              <input type="text" name="char4" value={inputs.char4} onChange={handleChange} />
+              <label>char4a</label>
+              <input type="text" name="char4a" value={inputs.char4a} onChange={handleChange} />
+            </div>
+            <div className="productFormLeft flex1">
+              <label>brandCountry</label>
+              <input type="text" name="brandCountry" value={inputs.brandCountry} onChange={handleChange} />
+              <label>originalCountry</label>
+              <input type="text" name="originalCountry" value={inputs.originalCountry} onChange={handleChange} />
+              <label>height</label>
+              <input type="text" name="height" value={inputs.height} onChange={handleChange} />
+              <label>weight</label>
+              <input type="text" name="weight" value={inputs.weight} onChange={handleChange} />
+              <label>width</label>
+              <input type="text" name="width" value={inputs.width} onChange={handleChange} />
+              <label>length</label>
+              <input type="text" name="length" value={inputs.length} onChange={handleChange} />
+              <label>singleProd</label>
+              <input type="text" name="singleProd" value={inputs.singleProd} onChange={handleChange} />
+              <label>Categories</label>
+              <input type="text" name="category" value={inputs.category} onChange={handleCat} />
+              <label>Complect</label>
+              <input type="text" name="complect" value={inputs.complect} onChange={handleComplect} />
+              <label>In Stock</label>
+              <select name="inStock" id="idStock" onChange={handleChange}>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          
           <div className="productFormRight">
             <div className="productUpload">
-              <img src={product.img} alt="" className="productUploadImg"/>
+              <img src={product.img} alt="" className="productUploadImg" />
               <label for="file">
                 <Publish />
               </label>
-              <input type="file" id="file" style={{ display: "none" }}  onChange={(e) => setFile(e.target.files[0])} />
+              <input type="file" id="file" style={{ display: "none" }} onChange={(e) => setFile(e.target.files[0])} />
             </div>
             <button onClick={handleClick} className="productButton">Update</button>
           </div>

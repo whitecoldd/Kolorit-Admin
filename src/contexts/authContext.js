@@ -2,7 +2,7 @@ import userSlice from "../redux/userRedux";
 import { createContext, useEffect, useReducer } from "react";
 
 const INITIAL_STATE = {
-  user: JSON.parse(localStorage.getItem("persist:root")).user || null,
+  user: (JSON.parse(localStorage.getItem("persist:root"))?.user) || null,
   isFetching: false,
   error: false,
 };
