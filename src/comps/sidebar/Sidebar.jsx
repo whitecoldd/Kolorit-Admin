@@ -65,6 +65,24 @@ export default function Sidebar() {
                 Categories
               </li>
             </Link>
+            <Link to='/contacts'>
+              <li className="sidebarListItem">
+                <BarChart className="sidebarIcon" />
+                Contacts
+              </li>
+            </Link>
+            <Link to='/abouts'>
+              <li className="sidebarListItem">
+                <BarChart className="sidebarIcon" />
+                About
+              </li>
+            </Link>
+            <Link to='/articles'>
+              <li className="sidebarListItem">
+                <BarChart className="sidebarIcon" />
+                Articles
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">

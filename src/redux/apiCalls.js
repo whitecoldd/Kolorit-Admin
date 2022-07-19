@@ -42,6 +42,48 @@ import {
   addSliderSuccess,
   addSliderFailure,
 } from './sliderRedux'
+import {
+  getContactStart,
+  getContactSuccess,
+  getContactFailure,
+  deleteContactStart,
+  deleteContactSuccess,
+  deleteContactFailure,
+  updateContactStart,
+  updateContactSuccess,
+  updateContactFailure,
+  addContactStart,
+  addContactSuccess,
+  addContactFailure,
+} from './contactsRedux'
+import {
+  getAboutStart,
+  getAboutSuccess,
+  getAboutFailure,
+  deleteAboutStart,
+  deleteAboutSuccess,
+  deleteAboutFailure,
+  updateAboutStart,
+  updateAboutSuccess,
+  updateAboutFailure,
+  addAboutStart,
+  addAboutSuccess,
+  addAboutFailure,
+} from './aboutRedux'
+import {
+  getArticleStart,
+  getArticleSuccess,
+  getArticleFailure,
+  deleteArticleStart,
+  deleteArticleSuccess,
+  deleteArticleFailure,
+  updateArticleStart,
+  updateArticleSuccess,
+  updateArticleFailure,
+  addArticleStart,
+  addArticleSuccess,
+  addArticleFailure,
+} from './articleRedux'
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
@@ -79,6 +121,33 @@ export const getSlider = async (dispatch) => {
     dispatch(getSliderFailure());
   }
 };
+export const getContact = async (dispatch) => {
+  dispatch(getContactStart());
+  try {
+    const res = await publicRequest.get("/contact/find/");
+    dispatch(getContactSuccess(res.data));
+  } catch (err) {
+    dispatch(getContactFailure());
+  }
+};
+export const getAbout = async (dispatch) => {
+  dispatch(getAboutStart());
+  try {
+    const res = await publicRequest.get("/about/find/");
+    dispatch(getAboutSuccess(res.data));
+  } catch (err) {
+    dispatch(getAboutFailure());
+  }
+};
+export const getArticle = async (dispatch) => {
+  dispatch(getArticleStart());
+  try {
+    const res = await publicRequest.get("/article/find/");
+    dispatch(getArticleSuccess(res.data));
+  } catch (err) {
+    dispatch(getArticleFailure());
+  }
+};
 
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
@@ -105,6 +174,33 @@ export const deleteSlider = async (id, dispatch) => {
     dispatch(deleteSliderSuccess(id));
   } catch (err) {
     dispatch(deleteSliderFailure());
+  }
+};
+export const deleteContact = async (id, dispatch) => {
+  dispatch(deleteContactStart());
+  try {
+    const res = await userRequest.delete(`/contact/${id}`);
+    dispatch(deleteContactSuccess(id));
+  } catch (err) {
+    dispatch(deleteContactFailure());
+  }
+};
+export const deleteAbout = async (id, dispatch) => {
+  dispatch(deleteAboutStart());
+  try {
+    const res = await userRequest.delete(`/about/${id}`);
+    dispatch(deleteAboutSuccess(id));
+  } catch (err) {
+    dispatch(deleteAboutFailure());
+  }
+};
+export const deleteArticle = async (id, dispatch) => {
+  dispatch(deleteArticleStart());
+  try {
+    const res = await userRequest.delete(`/article/${id}`);
+    dispatch(deleteArticleSuccess(id));
+  } catch (err) {
+    dispatch(deleteArticleFailure());
   }
 };
 
@@ -135,6 +231,33 @@ export const updateSlider = async (id, slider, dispatch) => {
     dispatch(updateSliderFailure(err));
   }
 };
+export const updateContact = async (id, contact, dispatch) => {
+  dispatch(updateContactStart());
+  try {
+    const res = await userRequest.put(`/contact/${id}`, contact);
+    dispatch(updateContactSuccess(res.data));
+  } catch (err) {
+    dispatch(updateContactFailure(err));
+  }
+};
+export const updateAbout = async (id, about, dispatch) => {
+  dispatch(updateAboutStart());
+  try {
+    const res = await userRequest.put(`/about/${id}`, about);
+    dispatch(updateAboutSuccess(res.data));
+  } catch (err) {
+    dispatch(updateAboutFailure(err));
+  }
+};
+export const updateArticle = async (id, article, dispatch) => {
+  dispatch(updateArticleStart());
+  try {
+    const res = await userRequest.put(`/article/${id}`, article);
+    dispatch(updateArticleSuccess(res.data));
+  } catch (err) {
+    dispatch(updateArticleFailure(err));
+  }
+};
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
@@ -160,5 +283,32 @@ export const addSlider = async (slider, dispatch) => {
     dispatch(addSliderSuccess(res.data));
   } catch (err) {
     dispatch(addSliderFailure());
+  }
+};
+export const addContact = async (contact, dispatch) => {
+  dispatch(addContactStart());
+  try {
+    const res = await userRequest.post(`/contact/`, contact);
+    dispatch(addContactSuccess(res.data));
+  } catch (err) {
+    dispatch(addContactFailure());
+  }
+};
+export const addAbout = async (about, dispatch) => {
+  dispatch(addAboutStart());
+  try {
+    const res = await userRequest.post(`/about/`, about);
+    dispatch(addAboutSuccess(res.data));
+  } catch (err) {
+    dispatch(addAboutFailure());
+  }
+};
+export const addArticle = async (article, dispatch) => {
+  dispatch(addArticleStart());
+  try {
+    const res = await userRequest.post(`/article/`, article);
+    dispatch(addArticleSuccess(res.data));
+  } catch (err) {
+    dispatch(addArticleFailure());
   }
 };

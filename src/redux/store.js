@@ -3,6 +3,9 @@ import userReducer from "./userRedux";
 import productReducer from "./productRedux";
 import categoryReducer from "./categoryRedux";
 import sliderReducer from "./sliderRedux";
+import contactReducer from "./contactsRedux";
+import aboutReducer from "./aboutRedux";
+import articleReducer from "./articleRedux";
 import {
   persistStore,
   persistReducer,
@@ -31,6 +34,9 @@ const rootReducer = combineReducers({
   product: productReducer,
   category: categoryReducer,
   slider: sliderReducer,
+  contact: contactReducer,
+  about: aboutReducer,
+  article: articleReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
