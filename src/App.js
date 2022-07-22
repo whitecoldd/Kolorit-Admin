@@ -1,7 +1,6 @@
 import Topbar from "./comps/topbar/Topbar";
 import Sidebar from "./comps/sidebar/Sidebar";
 import Home from "./pages/home/Home";
-import { Container } from '@mui/material'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import UserList from "./pages/userlist/UserList";
@@ -33,7 +32,6 @@ import { useSelector } from 'react-redux'
 function App() {
   //const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin
   const admin = useSelector((state) => state.user.currentUser);
-  const { user } = useContext(AuthContext)
   return (
     <>
       <Router>
