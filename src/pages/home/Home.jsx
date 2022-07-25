@@ -4,7 +4,6 @@ import FeaturedInfo from "../../comps/ftinfo/FtInfo";
 import Chart from '../../comps/chart/Chart';
 import WidgetLg from '../../comps/widgetlg/WidgetLg';
 import WidgetSm from '../../comps/widgetsm/WidgetSm';
-
 export default function Home({userData}) {
     return (
         <div className='home'>

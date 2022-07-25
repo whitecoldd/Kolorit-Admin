@@ -1,7 +1,8 @@
 import "./widget.css";
 import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethods";
-import {format} from "timeago.js"
+import { format } from "timeago.js"
+import { Link } from 'react-router-dom'
 export default function WidgetLg() {
   const [orders, setOrders] = useState([]);
 
@@ -10,7 +11,7 @@ export default function WidgetLg() {
       try {
         const res = await userRequest.get("/order/?new=new");
         setOrders(res.data);
-      } catch {}
+      } catch { }
     };
     getOrders();
   }, []);
@@ -19,14 +20,18 @@ export default function WidgetLg() {
   };
   return (
     <div className="widgetLg">
-      <h3 className="widgetLgTitle">Latest transactions</h3>
+      <div>
+        <h3 className="widgetLgTitle">Latest transactions</h3>
+
+      </div>
       <table className="widgetLgTable">
         <tr className="widgetLgTr">
           <th className="widgetLgTh">Customer</th>
           <th className="widgetLgTh">Date</th>
-          <th className="widgetLgTh">Delivery type</th>
+          <th className="widgetLgTh">Contact</th>
           <th className="widgetLgTh">Address</th>
           <th className="widgetLgTh">Status</th>
+          <th className="widgetLgTh">Details</th>
         </tr>
         {orders.map((order) => (
           <tr className="widgetLgTr" key={order._id}>
@@ -34,10 +39,15 @@ export default function WidgetLg() {
               <span className="widgetLgName">{order.userName}</span>
             </td>
             <td className="widgetLgDate">{format(order.createdAt)}</td>
-            <td className="widgetLgAmount">{order.delType}</td>
+            <td className="widgetLgAmount">{order.phone}</td>
             <td className="widgetLgAmount">{order.address}</td>
             <td className="widgetLgStatus">
               <Button type={order.status} />
+            </td>
+            <td>
+              <Link to={"/order/" + order._id}>
+                <button className="productListEdit">Edit</button>
+              </Link>
             </td>
           </tr>
         ))}

@@ -1,16 +1,23 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom'
 import { login } from "../../redux/apiCalls";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-
+  const history = useNavigate()
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
-    console.log('Login Successful')
+    try{
+      login(dispatch, { username, password });
+      console.log('Login Successful')
+      history('/')
+    } catch (e){
+      history('/login')
+      console.log(e)
+    }
   };
 
   return (
