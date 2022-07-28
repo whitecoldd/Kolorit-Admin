@@ -164,7 +164,9 @@ export default function Product({ productData }) {
               <input type="text" name="length" value={inputs.length} onChange={handleChange} />
               <label>singleProd</label>
               <input type="text" name="singleProd" value={inputs.singleProd} onChange={handleChange} />
-              <label>Categories</label>
+              <label>Brand</label>
+              <input type="text" name="brand" value={inputs.brand} onChange={handleChange} />
+              <label>Category</label>
               <input type="text" name="category" value={inputs.category} onChange={handleCat} />
               <label>Complect</label>
               <input type="text" name="complect" value={inputs.complect} onChange={handleComplect} />

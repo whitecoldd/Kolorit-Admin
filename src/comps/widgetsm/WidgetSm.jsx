@@ -1,8 +1,8 @@
 import "./widget.css";
-import { Visibility } from "@material-ui/icons"
+import { Visibility } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import { userRequest } from "../../requestMethods";;
-
+import { userRequest } from "../../requestMethods";
+import { Link } from 'react-router-dom' 
 export default function WidgetSm() {
   const [users, setUsers] = useState([]);
 
@@ -11,8 +11,8 @@ export default function WidgetSm() {
       try {
         const res = await userRequest.get("user/find/?new=true");
         setUsers(res.data);
-      } catch(e) {
-        console.log(e)
+      } catch (e) {
+        console.log(e);
       }
     };
     getUsers();
@@ -21,7 +21,7 @@ export default function WidgetSm() {
     <div className="widgetSm">
       <span className="widgetSmTitle">New Join Members</span>
       <ul className="widgetSmList">
-      {users.map((user) => (
+        {users.map((user) => (
           <li className="widgetSmListItem" key={user._id}>
             <img
               src={
@@ -34,10 +34,12 @@ export default function WidgetSm() {
             <div className="widgetSmUser">
               <span className="widgetSmUsername">{user.username}</span>
             </div>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Display
-            </button>
+            <Link to={"/users/" + user._id}>
+              <button className="widgetSmButton">
+                <Visibility className="widgetSmIcon" />
+                Display
+              </button>
+            </Link>
           </li>
         ))}
       </ul>

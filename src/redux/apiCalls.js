@@ -43,6 +43,20 @@ import {
   addCategoryFailure,
 } from "./categoryRedux";
 import {
+  getBrandStart,
+  getBrandSuccess,
+  getBrandFailure,
+  deleteBrandStart,
+  deleteBrandSuccess,
+  deleteBrandFailure,
+  updateBrandStart,
+  updateBrandSuccess,
+  updateBrandFailure,
+  addBrandStart,
+  addBrandSuccess,
+  addBrandFailure,
+} from "./brandRedux";
+import {
   getSliderStart,
   getSliderSuccess,
   getSliderFailure,
@@ -155,6 +169,42 @@ export const addUser = async (user, dispatch) => {
     dispatch(addUserSuccess(res.data));
   } catch (err) {
     dispatch(addUserFailure());
+  }
+};
+export const getBrand = async (dispatch) => {
+  dispatch(getBrandStart());
+  try {
+    const res = await userRequest.get("/brand/find");
+    dispatch(getBrandSuccess(res.data));
+  } catch (err) {
+    dispatch(getBrandFailure());
+  }
+};
+export const deleteBrand = async (id, dispatch) => {
+  dispatch(deleteBrandStart());
+  try {
+    const res = await userrRequest.delete(`/brand/${id}`);
+    dispatch(deleteBrandSuccess(id));
+  } catch (err) {
+    dispatch(deleteBrandFailure());
+  }
+};
+export const updateBrand = async (id, brand, dispatch) => {
+  dispatch(updateBrandStart());
+  try {
+    const res = await userRequest.put(`/brand/${id}`, brand);
+    dispatch(updateBrandSuccess(res.data));
+  } catch (err) {
+    dispatch(updateBrandFailure());
+  }
+};
+export const addBrand = async (brand, dispatch) => {
+  dispatch(addBrandStart());
+  try {
+    const res = await userRequest.post(`/brand/`, brand);
+    dispatch(addBrandSuccess(res.data));
+  } catch (err) {
+    dispatch(addBrandFailure());
   }
 };
 

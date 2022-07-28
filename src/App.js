@@ -20,7 +20,9 @@ import ContactList from "./pages/contactsList/ContactsList";
 import AboutList from "./pages/aboutList/AboutList";
 import ArticleList from "./pages/articleList/ArticleList";
 import OrderList from "./pages/orderList/OrderList";
+import BrandsList from "./pages/brandsList/BrandsList";
 import Product from "./pages/product/Product";
+import Brand from "./pages/brand/Brand";
 import Category from "./pages/category/category";
 import Slider from "./pages/slider/Slider";
 import Contact from "./pages/contacts/Contacts";
@@ -32,6 +34,7 @@ import NewSlider from "./pages/newSlider/NewSlider";
 import NewContact from "./pages/newContacts/NewContacts";
 import NewAbout from "./pages/newAbout/NewAbout";
 import NewArticle from "./pages/newArticle/NewArticle";
+import NewBrand from "./pages/newBrand/NewBrand";
 import Login from "./pages/login/Login";
 import { useContext } from "react";
 import { AuthContext } from "../src/contexts/authContext";
@@ -72,6 +75,11 @@ function App() {
                   exact
                   path="/newContact"
                   element={<NewContact />}
+                ></Route>
+                <Route
+                  exact
+                  path="/newBrand"
+                  element={<NewBrand />}
                 ></Route>
                 <Route exact path="/newAbout" element={<NewAbout />}></Route>
                 <Route
@@ -118,6 +126,11 @@ function App() {
                 ></Route>
                 <Route
                   exact
+                  path="/brands"
+                  element={<BrandsList />}
+                ></Route>
+                <Route
+                  exact
                   path="/categories"
                   element={<CategoryList />}
                 ></Route>
@@ -130,6 +143,11 @@ function App() {
                   exact
                   path="/users/:userId"
                   element={<User userRows={userRows} />}
+                ></Route>
+                <Route
+                  exact
+                  path="/brands/:brandId"
+                  element={<Brand userRows={userRows} />}
                 ></Route>
               </>
             ) : (

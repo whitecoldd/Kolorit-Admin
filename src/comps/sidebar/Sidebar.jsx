@@ -65,6 +65,12 @@ export default function Sidebar() {
                 Slider
               </li>
             </Link>
+            <Link to ='/brands'>
+              <li className="sidebarListItem">
+                <AttachMoney className="sidebarIcon" />
+                Brand
+              </li>
+            </Link>
             <Link to='/categories'>
               <li className="sidebarListItem">
                 <BarChart className="sidebarIcon" />

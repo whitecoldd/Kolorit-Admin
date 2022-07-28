@@ -244,6 +244,15 @@ export default function NewProduct() {
               />
             </div>
             <div className="addProductItem">
+              <label>Brand</label>
+              <input
+                name="brand"
+                type="text"
+                placeholder="Брэнд"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="addProductItem">
               <label>Promo</label>
               <input
                 name="promo"
